@@ -14,6 +14,22 @@ defmodule PlateSlateWeb.Schema do
     end
   end
 
+  mutation do
+    import_fields(:menu_mutations)
+  end
+
+  scalar :decimal do
+    parse(fn
+      %{value: value}, _ ->
+        Decimal.parse(value)
+
+      _, _ ->
+        :error
+    end)
+
+    serialize(&to_string/1)
+  end
+
   scalar :date do
     parse(fn input ->
       with %Absinthe.Blueprint.Input.String{value: value} <- input,

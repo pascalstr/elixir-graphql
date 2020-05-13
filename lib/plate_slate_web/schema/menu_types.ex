@@ -3,6 +3,28 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
 
   alias PlateSlateWeb.Resolvers
 
+  object :menu_queries do
+    field :menu_items, list_of(:menu_item) do
+      arg(:filter, :menu_item_filter)
+      arg(:order, type: :sort_order, default_value: :asc)
+      resolve(&Resolvers.Menu.menu_items/3)
+    end
+  end
+
+  object :menu_mutations do
+    field :create_menu_item, :menu_item do
+      arg(:input, non_null(:menu_item_input))
+      resolve(&Resolvers.Menu.create_item/3)
+    end
+  end
+
+  input_object :menu_item_input do
+    field :name, non_null(:string)
+    field :description, :string
+    field :price, non_null(:decimal)
+    field :category_id, non_null(:id)
+  end
+
   object :category do
     field(:name, :string)
     field(:description, :string)
@@ -51,19 +73,11 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
     field(:added_after, :date)
   end
 
-  object :menu_queries do
-    field :menu_items, list_of(:menu_item) do
-      arg(:filter, :menu_item_filter)
-      arg(:order, type: :sort_order, default_value: :asc)
-      resolve(&Resolvers.Menu.menu_items/3)
-    end
-  end
-
   object :menu_item do
     field(:id, :id)
     field(:name, :string)
     field(:description, :string)
-    field(:price, :float)
+    field(:price, :decimal)
     field(:added_on, :date)
   end
 end
