@@ -1,8 +1,7 @@
 {
   "key": "graphiql",
-  "lastId": 3,
-  "tabIds": ["tab1", "tab2", "tab3"],
-  "closedTabs": [],
+  "lastId": 6,
+  "tabIds": ["tab1", "tab2", "tab3", "tab6"],
   "defaultUrl": "http://localhost:4000/playground",
   "defaultWebsocketUrl": "",
   "defaultQuery": "",
@@ -14,8 +13,25 @@
   "maxTabHistory": 20,
   "maxUrlHistory": 20,
   "maxHistory": 20,
-  "savedQueries": [],
-  "activeId": "tab3",
+  "savedQueries": [
+    {
+      "query": "query Search($term: String!) {\n  search(matching: $term) {\n    ...MenuItemFields\n    ...CategoryFields\n  }\n}\n\nfragment MenuItemFields on MenuItem {\n  name\n  price\n  description\n}\n\nfragment CategoryFields on Category {\n  name\n  items {\n    ...MenuItemFields\n  }\n}",
+      "variables": "{\n  \"term\": \"s\"\n}"
+    },
+    {
+      "query": "query ($filter: MenuItemFilter!) {\n  menuItems(filter: $filter) {\n    name\n    addedOn\n  }\n}\n",
+      "variables": "{\n  \"filter\": {\n    \"name\": \"a\", \n    \"addedBefore\": \"2020-05-20\"\n  }\n}"
+    },
+    {
+      "query": "mutation createMenuItem($menuItem: MenuItemInput!) {\n    createMenuItem(input: $menuItem) {\n    \tmenuItem {\n        ...MenuItemFields\n      }\n    errors {\n      ...Error\n    }\n    \n  \t}\n}\n\nfragment Error on InputError {\n  key\n  message\n}\n\nfragment MenuItemFields on MenuItem {\n  id\n  name\n  price\n  description\n}",
+      "variables": "{\n  \"menuItem\": {\n    \"name\": \"French Dip\",\n    \"description\": \"Roast beef, caramelized onions, horseradish, ...\",\n    \"price\": \"5.75\",\n    \"categoryId\": 1\n  }\n}"
+    },
+    {
+      "query": "mutation updateMenuItem($updateMenuItem: UpdateItemInput!) {\n    updateMenuItem(id: 17, input: $updateMenuItem) {\n    \tmenuItem {\n        id\n        name\n        price\n        description\n      }\n    errors {\n      key\n  \t\tmessage\n    }\n    \n  \t}\n}",
+      "variables": "{\n  \"updateMenuItem\": {\n    \"name\": \"French Dip\",\n    \"description\": \"Roast beef, onions, horseradishis\",\n    \"price\": \"7.75\"\n  }\n}"
+    }
+  ],
+  "activeId": "tab6",
   "tabs": [
     {
       "id": "tab1",
@@ -36,11 +52,11 @@
       ],
       "graphiql:query": "query Search($term: String!) {\n  search(matching: $term) {\n    ...MenuItemFields\n    ...CategoryFields\n  }\n}\n\nfragment MenuItemFields on MenuItem {\n  name\n  price\n  description\n}\n\nfragment CategoryFields on Category {\n  name\n  items {\n    ...MenuItemFields\n  }\n}",
       "graphiql:variables": "{\n  \"term\": \"s\"\n}",
+      "graphiql:queries": "{\"queries\":[{\"query\":\"query Search($term: String!) {\\n  search(matching: $term) {\\n    ...MenuItemFields\\n    ...CategoryFields\\n  }\\n}\\n\\nfragment MenuItemFields on MenuItem {\\n  name\\n  price\\n  description\\n}\\n\\nfragment CategoryFields on Category {\\n  name\\n  items {\\n    ...MenuItemFields\\n  }\\n}\",\"variables\":\"{\\n  \\\"term\\\": \\\"s\\\"\\n}\",\"operationName\":\"Search\"}]}",
       "graphiql:docExplorerWidth": 350,
       "graphiql:variableEditorHeight": 200,
       "graphiql:editorFlex": 1,
-      "graphiql:operationName": "Search",
-      "graphiql:queries": "{\"queries\":[{\"query\":\"query Search($term: String!) {\\n  search(matching: $term) {\\n    ...MenuItemFields\\n    ...CategoryFields\\n  }\\n}\\n\\nfragment MenuItemFields on MenuItem {\\n  name\\n  price\\n  description\\n}\\n\\nfragment CategoryFields on Category {\\n  name\\n  items {\\n    ...MenuItemFields\\n  }\\n}\",\"variables\":\"{\\n  \\\"term\\\": \\\"s\\\"\\n}\",\"operationName\":\"Search\"}]}"
+      "graphiql:operationName": "Search"
     },
     {
       "id": "tab2",
@@ -78,22 +94,41 @@
       "headers": [],
       "collapsed": false,
       "maxHistory": 20,
+      "history": [],
+      "graphiql:query": "mutation createMenuItem($menuItem: MenuItemInput!) {\n    createMenuItem(input: $menuItem) {\n    \tmenuItem {\n        ...MenuItemFields\n      }\n    errors {\n      ...Error\n    }\n    \n  \t}\n}\n\nfragment Error on InputError {\n  key\n  message\n}\n\nfragment MenuItemFields on MenuItem {\n  id\n  name\n  price\n  description\n}",
+      "graphiql:variables": "{\n  \"menuItem\": {\n    \"name\": \"French Dip\",\n    \"description\": \"Roast beef, caramelized onions, horseradish, ...\",\n    \"price\": \"5.75\",\n    \"categoryId\": 1\n  }\n}",
+      "graphiql:queries": "{\"queries\":[{\"query\":\"mutation ($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n      name\\n      description\\n      price\\n    }\\n  }\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  }\\n}\"},{\"query\":\"mutation ($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n      name\\n      description\\n      price\\n    }\\n  }\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": \\\"1\\\"\\n  }\\n}\"},{\"query\":\"mutation ($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n      name\\n      description\\n      price\\n    }\\n  }\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  }\\n}\"},{\"query\":\"mutation createMenuItem ($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n      name\\n      description\\n      price\\n    }\\n  }\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  }\\n}\",\"operationName\":\"createMenuItem\"},{\"query\":\"mutation createMenuItem($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n    \\tmenuItem {\\n        description\\n        id\\n        name\\n        price\\n      }\\n    errors {\\n      key\\n      message\\n    }\\n    \\n  \\t}\\n}\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  }\\n}\",\"operationName\":\"createMenuItem\"},{\"query\":\"mutation createMenuItem($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n    \\tmenuItem {\\n        description\\n        id\\n        name\\n        price\\n      }\\n    errors {\\n      ...Error\\n    }\\n    \\n  \\t}\\n}\\n\\nfragment Error on InputError {\\n\\t\\tkey\\n    message\\n}\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  }\\n}\",\"operationName\":\"createMenuItem\"},{\"query\":\"mutation createMenuItem($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n    \\tmenuItem {\\n        description\\n        id\\n        name\\n        price\\n      }\\n    errors {\\n      ...Error\\n    }\\n    \\n  \\t}\\n}\\n\\nfragment Error on InputError {\\n\\t\\tkey\\n    message\\n}\\n\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  }\\n}\",\"operationName\":\"createMenuItem\"},{\"query\":\"mutation createMenuItem($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n    \\tmenuItem {\\n        ...MenuItemFields\\n      }\\n    errors {\\n      ...Error\\n    }\\n    \\n  \\t}\\n}\\n\\nfragment Error on InputError {\\n\\t\\tkey\\n    message\\n}\\n\\nfragment MenuItemFields on MenuItem {\\n  id\\n  name\\n  price\\n  description\\n}\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  }\\n}\",\"operationName\":\"createMenuItem\"},{\"query\":\"mutation createMenuItem($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n    \\tmenuItem {\\n        ...MenuItemFields\\n      }\\n    errors {\\n      ...Error\\n    }\\n    \\n  \\t}\\n}\\n\\nmutation updateMenuItem($updateMenuItem: MenuItemInput!) {\\n    updateMenuItem(id: 17, input: $updateMenuItem) {\\n    \\tmenuItem {\\n        ...MenuItemFields\\n      }\\n    errors {\\n      ...Error\\n    }\\n    \\n  \\t}\\n}\\n\\n\\n\\nfragment Error on InputError {\\n  key\\n  message\\n}\\n\\nfragment MenuItemFields on MenuItem {\\n  id\\n  name\\n  price\\n  description\\n}\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  },\\n  \\\"updateMenuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, onions, horseradishis\\\",\\n    \\\"price\\\": \\\"7.75\\\"\\n  }\\n}\",\"operationName\":\"updateMenuItem\"},{\"query\":\"mutation createMenuItem($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n    \\tmenuItem {\\n        ...MenuItemFields\\n      }\\n    errors {\\n      ...Error\\n    }\\n    \\n  \\t}\\n}\\n\\nmutation updateMenuItem($updateMenuItem: UpdateItemInput!) {\\n    updateMenuItem(id: 17, input: $updateMenuItem) {\\n    \\tmenuItem {\\n        ...MenuItemFields\\n      }\\n    errors {\\n      ...Error\\n    }\\n    \\n  \\t}\\n}\\n\\n\\n\\nfragment Error on InputError {\\n  key\\n  message\\n}\\n\\nfragment MenuItemFields on MenuItem {\\n  id\\n  name\\n  price\\n  description\\n}\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  },\\n  \\\"updateMenuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, onions, horseradishis\\\",\\n    \\\"price\\\": \\\"7.75\\\"\\n  }\\n}\",\"operationName\":\"updateMenuItem\"}]}",
+      "graphiql:editorFlex": 1,
+      "graphiql:operationName": "createMenuItem",
+      "graphiql:variableEditorHeight": 237,
+      "graphiql:docExplorerWidth": 350,
+      "graphiql:docExplorerOpen": true
+    },
+    {
+      "id": "tab6",
+      "name": "Update menu item",
+      "url": "http://localhost:4000/playground",
+      "websocketUrl": "",
+      "proxy": false,
+      "headers": [],
+      "collapsed": false,
+      "maxHistory": 20,
       "history": [
         {
-          "query": "mutation ($menuItem: MenuItemInput!) {\n    createMenuItem(input: $menuItem) {\n      name\n      description\n      price\n    }\n  }",
+          "query": "mutation updateMenuItem($updateMenuItem: UpdateItemInput!) {\n    updateMenuItem(id: 17, input: $updateMenuItem) {\n    \tmenuItem {\n        id\n        name\n        price\n        description\n      }\n    errors {\n      key\n  \t\tmessage\n    }\n    \n  \t}\n}",
           "variables": {
-            "menuItem": {
+            "updateMenuItem": {
               "name": "French Dip",
-              "description": "Roast beef, caramelized onions, horseradish, ...",
-              "price": "5.75",
-              "categoryId": 1
+              "description": "Roast beef, onions, horseradishis",
+              "price": "7.75"
             }
           }
         }
       ],
-      "graphiql:query": "mutation ($menuItem: MenuItemInput!) {\n    createMenuItem(input: $menuItem) {\n      name\n      description\n      price\n    }\n  }",
-      "graphiql:variables": "{\n  \"menuItem\": {\n    \"name\": \"French Dip\",\n    \"description\": \"Roast beef, caramelized onions, horseradish, ...\",\n    \"price\": \"5.75\",\n    \"categoryId\": 1\n  }\n}",
-      "graphiql:queries": "{\"queries\":[{\"query\":\"mutation ($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n      name\\n      description\\n      price\\n    }\\n  }\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  }\\n}\"},{\"query\":\"mutation ($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n      name\\n      description\\n      price\\n    }\\n  }\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": \\\"1\\\"\\n  }\\n}\"},{\"query\":\"mutation ($menuItem: MenuItemInput!) {\\n    createMenuItem(input: $menuItem) {\\n      name\\n      description\\n      price\\n    }\\n  }\",\"variables\":\"{\\n  \\\"menuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, caramelized onions, horseradish, ...\\\",\\n    \\\"price\\\": \\\"5.75\\\",\\n    \\\"categoryId\\\": 1\\n  }\\n}\"}]}",
+      "graphiql:query": "mutation updateMenuItem($updateMenuItem: UpdateItemInput!) {\n    updateMenuItem(id: 17, input: $updateMenuItem) {\n    \tmenuItem {\n        id\n        name\n        price\n        description\n      }\n    errors {\n      key\n  \t\tmessage\n    }\n    \n  \t}\n}",
+      "graphiql:variables": "{\n  \"updateMenuItem\": {\n    \"name\": \"French Dip\",\n    \"description\": \"Roast beef, onions, horseradishis\",\n    \"price\": \"7.75\"\n  }\n}",
+      "graphiql:queries": "{\"queries\":[{\"query\":\"mutation updateMenuItem($updateMenuItem: UpdateItemInput!) {\\n    updateMenuItem(id: 17, input: $updateMenuItem) {\\n    \\tmenuItem {\\n        id\\n        name\\n        price\\n        description\\n      }\\n    errors {\\n      key\\n  \\t\\tmessage\\n    }\\n    \\n  \\t}\\n}\",\"variables\":\"{\\n  \\\"updateMenuItem\\\": {\\n    \\\"name\\\": \\\"French Dip\\\",\\n    \\\"description\\\": \\\"Roast beef, onions, horseradishis\\\",\\n    \\\"price\\\": \\\"7.75\\\"\\n  }\\n}\",\"operationName\":\"updateMenuItem\"}]}",
+      "graphiql:operationName": "updateMenuItem",
       "graphiql:editorFlex": 1,
       "graphiql:variableEditorHeight": 200,
       "graphiql:docExplorerWidth": 350
