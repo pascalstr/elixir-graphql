@@ -1,0 +1,70 @@
+{
+  "key": "graphiql",
+  "lastId": 2,
+  "tabIds": [
+    "tab1",
+    "tab2"
+  ],
+  "closedTabs": [],
+  "defaultUrl": "http://localhost:4000/playground",
+  "defaultWebsocketUrl": "",
+  "defaultQuery": "",
+  "defaultVariables": "",
+  "defaultProxy": false,
+  "defaultHeaders": [],
+  "usedUrls": [
+    "http://localhost:4000/playground"
+  ],
+  "recentHeaders": [],
+  "maxTabHistory": 20,
+  "maxUrlHistory": 20,
+  "maxHistory": 20,
+  "savedQueries": [],
+  "activeId": "tab2",
+  "tabs": [
+    {
+      "id": "tab1",
+      "name": "Search",
+      "url": "http://localhost:4000/playground",
+      "websocketUrl": "",
+      "proxy": false,
+      "headers": [],
+      "collapsed": false,
+      "maxHistory": 20,
+      "history": [],
+      "graphiql:query": "query Search($term: String!) {\n  search(matching: $term) {\n    ...MenuItemFields\n    ...CategoryFields\n  }\n}\n\nfragment MenuItemFields on MenuItem {\n  name\n  price\n  description\n}\n\nfragment CategoryFields on Category {\n  name\n  items {\n    ...MenuItemFields\n  }\n}",
+      "graphiql:variables": "{\n  \"term\": \"s\"\n}",
+      "graphiql:operationName": "Search",
+      "graphiql:editorFlex": 1,
+      "graphiql:variableEditorHeight": 200,
+      "graphiql:docExplorerWidth": 350
+    },
+    {
+      "id": "tab2",
+      "name": "Menu items",
+      "url": "http://localhost:4000/playground",
+      "websocketUrl": "",
+      "proxy": false,
+      "headers": [],
+      "collapsed": false,
+      "maxHistory": 20,
+      "history": [
+        {
+          "query": "query ($filter: MenuItemFilter!) {\n  menuItems(filter: $filter) {\n    name\n    addedOn\n  }\n}\n",
+          "variables": {
+            "filter": {
+              "name": "a",
+              "addedBefore": "2020-05-20"
+            }
+          }
+        }
+      ],
+      "graphiql:query": "query ($filter: MenuItemFilter!) {\n  menuItems(filter: $filter) {\n    name\n    addedOn\n  }\n}\n",
+      "graphiql:variables": "{\n  \"filter\": {\n    \"name\": \"a\", \n    \"addedBefore\": \"2020-05-20\"\n  }\n}",
+      "graphiql:queries": "{\"queries\":[{\"query\":\"query ($filter: MenuItemFilter!) {\\n  menuItems(filter: $filter) {\\n    name\\n    addedOn\\n  }\\n}\\n\",\"variables\":\"{\\n  \\\"filter\\\": {\\n    \\\"name\\\": \\\"a\\\", \\n    \\\"addedBefore\\\": \\\"2020-05-20\\\"\\n  }\\n}\"}]}",
+      "graphiql:editorFlex": 1,
+      "graphiql:variableEditorHeight": 200,
+      "graphiql:docExplorerWidth": 350
+    }
+  ]
+}
